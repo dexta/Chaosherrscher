@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chaos Game V1</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <button onclick="randomStart();drawMassive(5000);">Random</button>
+  <button onclick="niceStart();drawMassive(50000);">Nice</button>
+  <script type="text/javascript">
+    const canvas = document.getElementById('canvas'),
+          ctx    = canvas.getContext('2d');
+    const A=[0,0],B=[0,0],C=[0,0];
+    var S=[0,0];
+    
+    function nextPoint() {
+      var nr = parseInt(Math.random()*6)+1;
+      var ot = [0,0];
+      if(nr===1||nr===2) { ot = A; } else if(nr===3||nr===4) { ot = B; } else if(nr===5||nr===6) { ot = C; }
+      var M = [ (S[0]+ot[0])/2 , (S[1]+ot[1])/2 ];
+      S = M;
+      drawPoint(M[0],M[1],"#FF0000");
+      return nr;
+    }
+
+    function randomStart() {
+      A[0] = rN(800);
+      A[1] = rN(600);
+      B[0] = rN(800);
+      B[1] = rN(600);
+      C[0] = rN(800);
+      C[1] = rN(600);
+      S[0] = rN(800);
+      S[1] = rN(600);
+      drawPoint(A[0],A[1],'#FF0000');
+      drawPoint(B[0],B[1],'#00FF00');
+      drawPoint(C[0],C[1],'#0000FF');
+    }
+
+    function niceStart() {
+      A[0] = 400;
+      A[1] = 10;
+      B[0] = 10;
+      B[1] = 590;
+      C[0] = 790;
+      C[1] = 590;
+      S[0] = 400;
+      S[1] = 300;
+      drawPoint(A[0],A[1],'#FF0000');
+      drawPoint(B[0],B[1],'#00FF00');
+      drawPoint(C[0],C[1],'#0000FF');
+    }
+
+    function rN(f) {
+      return parseInt(Math.random()*f);
+    }
+
+    function rC() {
+      return [rN(800),rN(600)];
+    }
+
+    function drawMassive(no) {
+      let s = new Date()/1;
+      for(var i=0;i<no;i++) { nextPoint();}
+      console.log("time to Draw "+(new Date()/1-s));
+    }
+
+    function drawPoint(x,y,color,size) {
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = (color||false)? color : '#000000';
+      var s = (size||false)? size : 2;
+      ctx.arc(x,y,s,0,2*Math.PI);
+      ctx.stroke();
+    }
+  </script>  
+</body>
+</html>
