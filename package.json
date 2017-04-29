@@ -1,0 +1,27 @@
+{
+  "name": "chaosherrscher",
+  "version": "0.0.1",
+  "description": "Chaos-Game in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dexta/Chaosherrscher.git"
+  },
+  "keywords": [
+    "javascript",
+    "chaosgame"
+  ],
+  "author": "dexta.de",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dexta/Chaosherrscher/issues"
+  },
+  "homepage": "https://github.com/dexta/Chaosherrscher#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0"
+  }
+}
