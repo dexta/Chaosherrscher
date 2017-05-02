@@ -21,7 +21,21 @@
   },
   "homepage": "https://github.com/dexta/Chaosherrscher#readme",
   "devDependencies": {
+    "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0"
+    "gulp-concat": "^2.6.1",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-uglify": "^2.1.2",
+    "gulp-uglifycss": "^1.0.8",
+    "pump": "^1.0.2",
+    "run-sequence": "^1.2.2",
+    "tether": "^1.4.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
+    "gulp-jslint": "^1.0.10",
+    "jquery": "^3.2.1",
+    "tether": "^1.4.0"
   }
 }
