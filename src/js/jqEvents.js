@@ -17,39 +17,56 @@ $(function(){
       var setSt = alDa.val.split("-");
       var opts = {
         neck: parseInt(setSt[0]),
-        teil: setSt[1],
+        teil: parseInt(setSt[1]),
         brain: parseInt(setSt[2]),
         art: alDa.val
       };
-      C.niceSetup( opts.neck );
-      C.setPick( C.defaultPicks[opts.brain] );
+      console.dir(opts);
+      // C.niceSetup( opts.neck );
+      C.setNeck(opts.neck);
+      // C.setPick( C.defaultPicks[opts.brain] );
+      C.setBrain(opts.brain);
       // if(setSt[0]>=0) {
       //   C.niceSetup( parseInt(setSt[0]) );
       //   console.log("number points set to "+parseInt(setSt[0]));
       // }
-      if(setSt[1]!="") {
-        if(setSt[1]==="1/2") {
-          C.setFunction(C.defaultF[0]);
-          console.log("Function 1/2 no:0");
-        } else if(setSt[1]==="1/3") {
-          C.setFunction(C.defaultF[1]);
-          console.log("Function 1/3 no:1");
-        } else if(setSt[1]==="3/8") {
-          C.setFunction(C.defaultF[2]);
-          console.log("Function 3/8 no:2");
-        }
-      }
+
+      C.setFactor(C.defaultFactor[setSt[1]]);
+      // if(setSt[1]!="") {
+        // if(setSt[1]==="1/2") {
+        //   C.setFactor(0.5);
+        //   console.log("Function 1/2 no:0");
+        // } else if(setSt[1]==="1/3") {
+        //   C.setFactor(0.333);
+        //   console.log("Function 1/3 no:1");
+        // } else if(setSt[1]==="3/8") {
+        //   C.setFactor(0.375);
+        //   console.log("Function 3/8 no:2");
+        // }
+      // }
 
       setOptionView(opts);
-
+      C.goSetup();
       // if(setSt[2]!='') {
       //   C.setPick(C.defaultPicks[ parseInt(setSt[2]) ]);
       //   console.log("picks set to "+parseInt(setSt[2]));
       // }
 
-      C.clearCanvas();
-      C.colorStart();
+      // C.clearCanvas();
+      // C.colorStart();
 
+    } else if(alDa.btn==='neck') {
+      C.setNeck(alDa.val);
+    } else if(alDa.btn==='teil') {
+      C.setFactor(C.defaultFactor[alDa.val]);
+    } else if(alDa.btn==='brain') {
+      C.setBrain(alDa.val);
+    } else if(alDa.btn==='create') {
+      if(alDa.val==='nice') {
+        C.goSetup();
+      } else if(alDa.val==='random') {
+        C.goSetup('random');
+      }
     }
 
     var chOpt = {};

@@ -13,17 +13,14 @@ $(function(){
 
   setOptionView();
 
-  C = new choasherrscher(WIDHT,HEIGHT,ctx);
-  C.niceSetup(6);
-  C.setFunction(C.defaultF[2]);
-  C.setPick(C.defaultPicks[1]);
-  C.colorStart();
+  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:4,brain:1,factor:0.5});
+  C.goSetup();
 
 });
 
 function setOptionView(tConfig) {
   if(!tConfig||false) {
-    tConfig = { art: '5-1/3-0', neck: 3, teil: '1/2', brain: 3 };
+    tConfig = { art: '5-1/3-0', neck: 4, teil: 1, brain: 1 };
   }
 
   $("[data-btn]").each(function(i,e){
