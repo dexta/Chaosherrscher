@@ -13,7 +13,7 @@ $(function(){
 
   setOptionView();
 
-  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:4,brain:1,factor:0.5});
+  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:5,brain:0,factor:0.375});
   C.goSetup();
 
 });

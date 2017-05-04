@@ -3,9 +3,7 @@ $(function(){
   // Select the preset
   // 
   $('[data-btn]').on('click',function(e){ 
-    // console.log("all Data: ");    
     var alDa = $(this).data();
-    // console.dir(alDa);
     e.stopPropagation();
 
     if(alDa.btn==='runButton') {
@@ -22,38 +20,12 @@ $(function(){
         art: alDa.val
       };
       console.dir(opts);
-      // C.niceSetup( opts.neck );
       C.setNeck(opts.neck);
-      // C.setPick( C.defaultPicks[opts.brain] );
       C.setBrain(opts.brain);
-      // if(setSt[0]>=0) {
-      //   C.niceSetup( parseInt(setSt[0]) );
-      //   console.log("number points set to "+parseInt(setSt[0]));
-      // }
 
       C.setFactor(C.defaultFactor[setSt[1]]);
-      // if(setSt[1]!="") {
-        // if(setSt[1]==="1/2") {
-        //   C.setFactor(0.5);
-        //   console.log("Function 1/2 no:0");
-        // } else if(setSt[1]==="1/3") {
-        //   C.setFactor(0.333);
-        //   console.log("Function 1/3 no:1");
-        // } else if(setSt[1]==="3/8") {
-        //   C.setFactor(0.375);
-        //   console.log("Function 3/8 no:2");
-        // }
-      // }
-
       setOptionView(opts);
       C.goSetup();
-      // if(setSt[2]!='') {
-      //   C.setPick(C.defaultPicks[ parseInt(setSt[2]) ]);
-      //   console.log("picks set to "+parseInt(setSt[2]));
-      // }
-
-      // C.clearCanvas();
-      // C.colorStart();
 
     } else if(alDa.btn==='neck') {
       C.setNeck(alDa.val);
