@@ -10,17 +10,17 @@ $(function(){
   ctx.canvas.width = WIDHT;
 
   console.log(can.height()+" - "+can.width());
+  setOptionView({art:'5-2-0'});
 
-  setOptionView();
-
-  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:5,brain:0,factor:0.375});
+  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:5,brain:0,teil:2});
   C.goSetup();
 
+  setOptionView();
 });
 
 function setOptionView(tConfig) {
   if(!tConfig||false) {
-    tConfig = { art: '5-1/3-0', neck: 4, teil: 1, brain: 1 };
+    tConfig = C.getConfig();
   }
 
   $("[data-btn]").each(function(i,e){

@@ -48,37 +48,14 @@ var choasherrscher = function(width,height,ctx,config) {
     var hh = (this.H<650)? this.H/23 : this.H/10;
     if(numberOfPoints===3) {
       this.P = [[this.W/2,this.H/2],[this.W/2,hh],[wh,this.H-hh],[this.W-(wh*2),this.H-hh]];
-      // this.P[0] = [this.W/2,this.H/2];
-      // this.P[1] = [this.W/2,hh];
-      // this.P[2] = [wh,this.H-hh];
-      // this.P[3] = [this.W-(wh*2),this.H-hh];
     } else if(numberOfPoints===4) {
       var hf = (this.W>this.H)? this.H-(2*hh) : this.W-(2*wh);
       wh = (this.W-hf)/2; hh = (this.H-hf)/2;
       this.P = [[wh+(hf/2),hh+(hf/2)],[wh,hh],[wh+hf,hh],[wh,hh+hf],[wh+hf,hh+hf]];
-      // this.P[0] = [wh+(hf/2),hh+(hf/2)];
-      // this.P[1] = [wh,hh];
-      // this.P[2] = [wh+hf,hh];
-      // this.P[3] = [wh,hh+hf];
-      // this.P[4] = [wh+hf,hh+hf];
     } else if(numberOfPoints===5) {
       this.P = [[this.W/2,this.H/2],[this.W/2,hh],[wh*2,this.H/3],[this.W-(wh*2),this.H/3],[wh*3,this.H-hh],[this.W-(wh*3),this.H-hh]];
-      // this.P[0] = [this.W/2,this.H/2];
-      // this.P[1] = [this.W/2,hh];
-      // this.P[2] = [wh*2,this.H/3];
-      // this.P[3] = [this.W-(wh*2),this.H/3];
-      // this.P[4] = [wh*3,this.H-hh];
-      // this.P[5] = [this.W-(wh*3),this.H-hh];
-      // this.factor = 0.5;
     } else if(numberOfPoints===6) {
       this.P = [[this.W/2,this.H/2],[this.W/2,hh],[wh*2,this.H/4],[this.W-(wh*2),this.H/4],[wh*2,this.H-(this.H/4)],[this.W-(wh*2),this.H-(this.H/4)],[this.W/2,this.H-hh]];
-      // this.P[0] = [this.W/2,this.H/2];
-      // this.P[1] = [this.W/2,hh];
-      // this.P[2] = [wh*2,this.H/4];
-      // this.P[3] = [this.W-(wh*2),this.H/4];
-      // this.P[4] = [wh*2,this.H-(this.H/4)];
-      // this.P[5] = [this.W-(wh*2),this.H-(this.H/4)];
-      // this.P[6] = [this.W/2,this.H-hh];
     }
   };
 
@@ -92,6 +69,14 @@ var choasherrscher = function(width,height,ctx,config) {
 
   this.setNeck = function(nEck) { this.neck = nEck; };
 
+  this.getConfig = function() {
+    return { neck: this.neck, teil: this.teil, brain: this.brain };
+  };
+
+  this.setConfig = function(newConf) {
+    for(var nc in newConf) { this[nc] = newConf[nc]; }
+    return this.getConfig();
+  };
 
   this.next = function() {
     var nePo = this.pick( this.P )
@@ -126,7 +111,7 @@ var choasherrscher = function(width,height,ctx,config) {
     if(!set||false) {
       this.niceSetup(this.neck);
     } else if(set==='random') {
-      var try1 = this.randomNice([this.W/2,this.H/2],this.neck,this.distRange,0);
+      var try1 = this.randomNice([[this.W/2,this.H/2]],0);
       if(try1||false) {
         this.P = try1;
       } else {
@@ -140,7 +125,7 @@ var choasherrscher = function(width,height,ctx,config) {
     console.log("eck:"+this.neck+" factor:"+this.factor+" brain:"+this.brain);
   };
 
-  this.randomNice = function(list,count,distance,deadman) {
+  this.randomNice = function(list,deadman) {
     deadman = ++deadman||1;
     if(deadman>=50) return null;
     var nx = parseInt(Math.random()*this.W);
@@ -149,13 +134,13 @@ var choasherrscher = function(width,height,ctx,config) {
       var aqa = ((list[l][0]-nx)>0)? (list[l][0]-nx)*2 : (nx-list[l][0])*2;
       var bqa = ((list[l][1]-ny)>0)? (list[l][1]-ny)*2 : (ny-list[l][1])*2;
       var nd = Math.sqrt( aqa + bqa );
-      if(nd<distance) {
-        return this.randomNice(list,count,distance,deadman);
+      if(nd<this.distRange) {
+        return this.randomNice(list,deadman);
       }
     }
     list.push([nx,ny]);
     if(list.length>this.neck) return list;
-    return this.randomNice(list,count,distance,0);
+    return this.randomNice(list,0);
   };
 
   this.clearCanvas = function() {
