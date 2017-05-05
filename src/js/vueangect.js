@@ -10,9 +10,9 @@ $(function(){
   ctx.canvas.width = WIDHT;
 
   console.log(can.height()+" - "+can.width());
-  setOptionView({art:'5-2-0'});
+  setOptionView({art:'3-1-0'});
 
-  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:5,brain:0,teil:2});
+  C = new choasherrscher(WIDHT,HEIGHT,ctx,{neck:3,brain:0,teil:0});
   C.goSetup();
 
   setOptionView();
