@@ -133,6 +133,17 @@ gulp.task('html-dist',function(cb){
     ],cb);
   });
 
+gulp.task('html-ghpage',function(cb){
+  pump([
+      gulp.src('src/index.html'),
+      htmlreplace({
+        'css': ['dist/css/lib.min.css','dist/css/chaosherrscher.min.css'],
+        'js' : ['dist/js/lib.min.js','dist/js/chaosherrscher.min.js']
+      }),
+      gulp.dest('./')
+    ],cb);
+  });
+
 gulp.task('build-dev-custom',function(cb){
   runSequence(['concat-css-custom-dev','copy-js-custom-dev','font-awesome-dev','html-dev'],cb);
 });
@@ -181,4 +192,8 @@ gulp.task('build-dev-all',function(cb) {
 
 gulp.task('build-dist-all',function(cb) {
   runSequence('compress-css-custom','compress-js-custom','compress-css-lib','compress-js-lib','font-awesome','html-dist',cb);
+});
+
+gulp.task('build-dist-allPages',function(cb) {
+  runSequence('build-dist-all','html-ghpage',cb);
 });
